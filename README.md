@@ -14,49 +14,30 @@ Mahiro-ware is a lightweight Windows customization tool that transforms your des
 
 ## Included Resources
 
-* 13 animated cursor files (`.ani`)
+* 13 animated cursor files (`1.ani`,`2.ani`,...)
 * Mahiro wallpaper (`background.bmp`)
-* Custom sound effect (`Windows Background.wav`)
+* Custom sound effect (`MahiroSfx.wav`)
 
 ## Requirements
 
 * Windows 10 / Windows 11
 * Python 3.10+ (for source version)
 
-## Running the Application
-
-### Option 1: Run from Source
+## Running from Source
 
 ```bash
 python Mahiro-ware.py
 ```
 
-### Option 2: Run the Built Executable
-
-After building with PyInstaller, launch:
-
-```text
-dist/Mahiro-ware.exe
-```
-
-No Python installation is required when using the executable version.
-
-All required resources are bundled into the executable, allowing the application to run as a standalone Windows program.
-
-## Portable Usage
-
-The built executable can be distributed and run directly on compatible Windows systems without installing Python or additional dependencies.
-
 ## Building
 
 ```bash
-pyinstaller --onefile --noconsole ^
---icon=mahiro.ico ^
---add-data "background.bmp;." ^
---add-data "*.ani;." ^
---add-data "*.wav;." ^
-Mahiro-ware.py
+pyinstaller --onefile --noconsole --add-data "background.bmp;." --add-data "1.ani;." --add-data "2.ani;." --add-data "3.ani;." --add-data "4.ani;." --add-data "5.ani;." --add-data "6.ani;." --add-data "7.ani;." --add-data "8.ani;." --add-data "9.ani;." --add-data "10.ani;." --add-data "11.ani;." --add-data "12.ani;." --add-data "13.ani;." --add-data "MahiroSfx.wav;." Mahiro-ware.py
 ```
+
+## Running from available releases
+
+[Click here!](https://github.com/vnguyhuyeditz/Mahiro-ware/releases)
 
 ## Output
 
@@ -80,7 +61,7 @@ If an installation step fails, check the log file for detailed information.
 
 ## Disclaimer
 
-This project modifies Windows user settings, including cursors, wallpaper, and sound configuration. Changes affect only the current user profile and can be reverted manually through Windows Settings.
+This project modifies Windows user settings, including cursors, wallpaper, and sound configuration. Changes affect only the current user profile and can be reverted manually through Windows Settings. Bugs might appear. Run it at your own risk!
 
 ## License
 
