@@ -156,14 +156,42 @@ except Exception as e:
 # ==================================================
 
 try:
+    import shutil
+
     log("Applying sound scheme...")
 
-    wav_path = resource_path("MahiroSfx.wav")
+    # tạo thư mục lưu file cố định
+    sound_dir = os.path.join(
+        os.environ["LOCALAPPDATA"],
+        "MahiroWare"
+    )
+    os.makedirs(sound_dir, exist_ok=True)
 
-    if not os.path.exists(wav_path):
+    # đường dẫn file gốc trong exe
+    source_wav = resource_path("MahiroSfx.wav")
+
+    if not os.path.exists(source_wav):
         raise FileNotFoundError(
             "MahiroSfx.wav not found"
         )
+
+    # extract ra file thật
+    wav_path = os.path.join(
+        sound_dir,
+        "MahiroSfx.wav"
+    )
+
+    shutil.copy2(
+        source_wav,
+        wav_path
+    )
+
+    if not os.path.exists(wav_path):
+        raise RuntimeError(
+            "Failed to extract MahiroSfx.wav"
+        )
+
+    log(f"Sound file extracted to: {wav_path}")
 
     root = winreg.OpenKey(
         winreg.HKEY_CURRENT_USER,
@@ -178,7 +206,10 @@ try:
     while True:
 
         try:
-            event_name = winreg.EnumKey(root, index)
+            event_name = winreg.EnumKey(
+                root,
+                index
+            )
             index += 1
 
         except OSError:
@@ -203,20 +234,30 @@ try:
                 wav_path
             )
 
-            winreg.CloseKey(current_key)
+            winreg.CloseKey(
+                current_key
+            )
 
             changed += 1
-            log(f"[OK] Sound changed: {event_name}")
+            log(
+                f"[OK] Sound changed: {event_name}"
+            )
 
         except OSError:
             pass
 
     winreg.CloseKey(root)
 
-    log(f"Changed {changed} sound events")
+    log(
+        f"Changed {changed} sound events"
+    )
 
 except Exception as e:
-    err = f"Sound Error: {type(e).__name__}: {e}"
+    err = (
+        f"Sound Error: "
+        f"{type(e).__name__}: {e}"
+    )
+
     log(f"[ERROR] {err}")
     errors.append(err)
 
